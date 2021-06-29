@@ -1,0 +1,17 @@
+html {
+  box-sizing: border-box;
+  border: 0.5px solid blue;
+}
+
+*,
+*:after,
+*::before {
+  box-sizing: inherit;
+}
+
+.fw-widget-wrapper {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+}

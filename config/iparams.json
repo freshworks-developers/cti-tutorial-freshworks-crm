@@ -1,0 +1,15 @@
+{
+  "fcrm_domain": {
+    "display_name": "Freshworks CRM domain",
+    "type": "text",
+    "description": "Your Freshworks CRM domain. Example: domain.myfreshworks.com",
+    "required": true
+  },
+  "fcrm_api_key": {
+    "display_name": "Freshworks CRM API Key",
+    "type": "text",
+    "description": "Your Freshworks CRM API key.",
+    "required": true,
+    "secure": true
+  }
+}
