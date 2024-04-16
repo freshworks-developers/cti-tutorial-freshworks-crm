@@ -11,11 +11,7 @@
       "requests": {
         "getSalesActivityTypes": {},
         "getSalesActivityOutcomes": {},
-        "createSalesActivity": {},
-        "createCallLog": {},
-        "createContact": {},
-        "getContactFilters": {},
-        "getContacts": {}
+        "getContactFilters": {}
       }
     },
     "deal": {}

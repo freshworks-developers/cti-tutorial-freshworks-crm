@@ -47,7 +47,7 @@ function getSalesActivityOutcomes(salesActivityTypeId) {
  * @param {String} note - Note for the sales activity
  */
 function addSalesActivity(contactId, note) {
-``
+
 }
 
 /**
@@ -58,12 +58,14 @@ function addSalesActivity(contactId, note) {
  * @param {String} note - Note for the phone call entry
  */
 function addPhoneCall(contact, call, note) {
+
 }
 
 /**
  * It creates a contact in Freshworks CRM with the phone number
  */
 function createContact() {
+
 }
 
 /**
@@ -77,6 +79,7 @@ function getContactFilters() {
  * It creates a contact in Freshdesk with the phone number
  */
 function getContacts() {
+
 }
 
 /**
