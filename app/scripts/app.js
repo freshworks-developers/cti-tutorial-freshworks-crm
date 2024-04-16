@@ -24,13 +24,7 @@ function goToContact(contactId) {
  * Fetches all the sales activity types in the account
  **/
 function getSalesActivityTypes() {
-  const url = 'https://<%= iparam.fcrm_domain %>/crm/sales/api/selector/sales_activity_types';
-  const options = {
-    headers: {
-      Authorization: 'Token token=<%= iparam.fcrm_api_key %>'
-    }
-  }
-  return client.request.get(url, options);
+  return client.request.invokeTemplate("getSalesActivityTypes", {});
 }
 
 /**
@@ -39,13 +33,11 @@ function getSalesActivityTypes() {
  * @param {Number} salesActivityTypeId - Identifier of the sales activity type
  **/
 function getSalesActivityOutcomes(salesActivityTypeId) {
-  const url = `https://<%= iparam.fcrm_domain %>/crm/sales/api/selector/sales_activity_types/${salesActivityTypeId}/sales_activity_outcomes`;
-  const options = {
-    headers: {
-      Authorization: 'Token token=<%= iparam.fcrm_api_key %>'
+  return client.request.invokeTemplate("getSalesActivityOutcomes", {
+    context: {
+      salesActivityTypeId: salesActivityTypeId
     }
-  }
-  return client.request.get(url, options);
+  });
 }
 
 /**
@@ -66,34 +58,25 @@ function addSalesActivity(contactId, note) {
  * @param {String} note - Note for the phone call entry
  */
 function addPhoneCall(contact, call, note) {
-
 }
 
 /**
  * It creates a contact in Freshworks CRM with the phone number
  */
 function createContact() {
-
 }
 
 /**
  * It fetches the contact filters available
  */
 function getContactFilters() {
-  const url = 'https://<%= iparam.fcrm_domain %>/crm/sales/api/contacts/filters';
-  const options = {
-    headers: {
-      Authorization: 'Token token=<%= iparam.fcrm_api_key %>'
-    }
-  }
-  return client.request.get(url, options);
+  return client.request.invokeTemplate("getContactFilters");
 }
 
 /**
  * It creates a contact in Freshdesk with the phone number
  */
 function getContacts() {
-
 }
 
 /**
