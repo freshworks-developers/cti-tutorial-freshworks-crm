@@ -1,7 +1,7 @@
 {
-  "platform-version": "2.3",
-  "product": {
-    "freshworks_crm": {
+  "platform-version": "3.0",
+  "modules": {
+    "common": {
       "location": {
         "left_nav_cti": {
           "url": "index.html",
@@ -17,7 +17,8 @@
         "getContactFilters": {},
         "getContacts": {}
       }
-    }
+    },
+    "deal": {}
   },
   "engines": {
     "node": "18.18.2",
