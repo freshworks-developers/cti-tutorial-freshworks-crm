@@ -32,13 +32,7 @@ function goToContact(contactId) {
  * Fetches all the sales activity types in the account
  **/
 function getSalesActivityTypes() {
-  const url = 'https://<%= iparam.fcrm_domain %>/crm/sales/api/selector/sales_activity_types';
-  const options = {
-    headers: {
-      Authorization: 'Token token=<%= iparam.fcrm_api_key %>'
-    }
-  }
-  return client.request.get(url, options);
+  return client.request.invokeTemplate("getSalesActivityTypes", {});
 }
 
 /**
@@ -47,13 +41,11 @@ function getSalesActivityTypes() {
  * @param {Number} salesActivityTypeId - Identifier of the sales activity type
  **/
 function getSalesActivityOutcomes(salesActivityTypeId) {
-  const url = `https://<%= iparam.fcrm_domain %>/crm/sales/api/selector/sales_activity_types/${salesActivityTypeId}/sales_activity_outcomes`;
-  const options = {
-    headers: {
-      Authorization: 'Token token=<%= iparam.fcrm_api_key %>'
+  return client.request.invokeTemplate("getSalesActivityOutcomes", {
+    context: {
+      salesActivityTypeId: salesActivityTypeId
     }
-  }
-  return client.request.get(url, options);
+  });
 }
 
 /**
@@ -72,13 +64,8 @@ function addSalesActivity(contactId, note) {
         getSalesActivityOutcomes(salesActivityType.id).then(function (data) {
           const salesActivityOutcomes = JSON.parse(data.response).sales_activity_outcomes;
           const salesActivityOutcome = salesActivityOutcomes.find(salesActivityOutcome => salesActivityOutcome.name === "Interested");
-          const url = `https://<%= iparam.fcrm_domain %>/crm/sales/api/sales_activities`;
-          const options = {
-            headers: {
-              Authorization: 'Token token=<%= iparam.fcrm_api_key %>'
-            },
-            json: {
-              sales_activity: {
+          const body = {
+            sales_activity: {
                 title: 'call',
                 notes: note,
                 targetable_type: 'Contact',
@@ -88,10 +75,11 @@ function addSalesActivity(contactId, note) {
                 owner_id: userId,
                 sales_activity_type_id: salesActivityType.id,
                 sales_activity_outcome_id: salesActivityOutcome.id
-              }
             }
           }
-          client.request.post(url, options).then(function (data) {
+          client.request.invokeTemplate("createSalesActivity", {
+            body: JSON.stringify(body)
+          }).then(function (data) {
             console.info('Success: Created a sales activity');
             console.info(data);
             showNotify('info', 'Successfully add a sales activity');
@@ -126,7 +114,6 @@ function addPhoneCall(contact, call, note) {
   client.data.get("loggedInUser").then(
     function (data) {
       const userId = data.loggedInUser.id;
-      const url = `https://<%= iparam.fcrm_domain %>/crm/sales/api/cti_phone_calls`;
       const options = {
         headers: {
           Authorization: 'Token token=<%= iparam.fcrm_api_key %>',
@@ -150,7 +137,9 @@ function addPhoneCall(contact, call, note) {
           }
         }
       };
-      client.request.post(url, options).then(function () {
+      client.request.invokeTemplate("createCallLog", {
+        body: JSON.stringify(options.formData)
+      }).then(function () {
         console.info('Success: Created a call log entry');
         showNotify('info', 'Successfully add a call log entry');
       }, function (error) {
@@ -169,14 +158,10 @@ function addPhoneCall(contact, call, note) {
  * It creates a contact in Freshworks CRM with the phone number
  */
 function createContact() {
-  const url = `https://<%= iparam.fcrm_domain %>/crm/sales/api/contacts`;
-  const options = {
-    headers: {
-      Authorization: 'Token token=<%= iparam.fcrm_api_key %>'
-    },
-    json: { "contact": { "first_name": "sample", "last_name": "person", "mobile_number": "1-111-111-2222" } }
-  }
-  client.request.post(url, options).then(function (data) {
+  const body = { "contact": { "first_name": "sample", "last_name": "person", "mobile_number": "1-111-111-2222" } }
+  client.request.invokeTemplate("createContact", {
+    body: JSON.stringify(body)
+  }).then(function (data) {
     console.info('Success: Created a contact');
     console.info(data);
     const contact = data.response.contact || JSON.parse(data.response).contact;
@@ -192,13 +177,7 @@ function createContact() {
  * It fetches the contact filters available
  */
 function getContactFilters() {
-  const url = 'https://<%= iparam.fcrm_domain %>/crm/sales/api/contacts/filters';
-  const options = {
-    headers: {
-      Authorization: 'Token token=<%= iparam.fcrm_api_key %>'
-    }
-  }
-  return client.request.get(url, options);
+  return client.request.invokeTemplate("getContactFilters");
 }
 
 /**
@@ -207,13 +186,11 @@ function getContactFilters() {
 function getContacts() {
   getContactFilters().then(function (data) {
     const filter = JSON.parse(data.response).filters.find(filter => filter.name === 'All Contacts');
-    const url = `https://<%= iparam.fcrm_domain %>/crm/sales/api/contacts/view/${filter.id}`;
-    const options = {
-      headers: {
-        Authorization: 'Token token=<%= iparam.fcrm_api_key %>'
+    client.request.invokeTemplate("getContacts", {
+      context: {
+        filterId: filter.id
       }
-    }
-    client.request.get(url, options).then(function (data) {
+    }).then(function (data) {
       console.info('Success: Got contacts');
       console.table(JSON.parse(data.response).contacts);
       showNotify('info', 'Successfully got the contacts list');

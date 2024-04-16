@@ -1,0 +1,75 @@
+{
+  "getSalesActivityTypes": {
+    "schema": {
+      "method": "GET",
+      "host": "<%= iparam.fcrm_domain %>",
+      "path": "/crm/sales/api/selector/sales_activity_types",
+      "headers": {
+        "Authorization": "Token token=<%= iparam.fcrm_api_key %>"
+      }
+    }
+  },
+  "getSalesActivityOutcomes": {
+    "schema": {
+      "method": "GET",
+      "host": "<%= iparam.fcrm_domain %>",
+      "path": "/crm/sales/api/selector/sales_activity_types/<%= context.salesActivityTypeId %>/sales_activity_outcomes",
+      "headers": {
+        "Authorization": "Token token=<%= iparam.fcrm_api_key %>"
+      }
+    }
+  },
+  "createSalesActivity": {
+    "schema": {
+      "method": "POST",
+      "host": "<%= iparam.fcrm_domain %>",
+      "path": "/crm/sales/api/sales_activities",
+      "headers": {
+        "Content-Type": "application/json",
+        "Authorization": "Token token=<%= iparam.fcrm_api_key %>"
+      }
+    }
+  },
+  "createCallLog": {
+    "schema": {
+      "method": "POST",
+      "host": "<%= iparam.fcrm_domain %>",
+      "path": "/crm/sales/api/cti_phone_calls",
+      "headers": {
+        "Content-Type": "application/json",
+        "Authorization": "Token token=<%= iparam.fcrm_api_key %>"
+      }
+    }
+  },
+  "createContact": {
+    "schema": {
+      "method": "POST",
+      "host": "<%= iparam.fcrm_domain %>",
+      "path": "/crm/sales/api/contacts",
+      "headers": {
+        "Content-Type": "application/json",
+        "Authorization": "Token token=<%= iparam.fcrm_api_key %>"
+      }
+    }
+  },
+  "getContactFilters": {
+    "schema": {
+      "method": "GET",
+      "host": "<%= iparam.fcrm_domain %>",
+      "path": "/crm/sales/api/contacts/filters",
+      "headers": {
+        "Authorization": "Token token=<%= iparam.fcrm_api_key %>"
+      }
+    }
+  },
+  "getContacts": {
+    "schema": {
+      "method": "GET",
+      "host": "<%= iparam.fcrm_domain %>",
+      "path": "/crm/sales/api/contacts/view/<%= context.filterId %>",
+      "headers": {
+        "Authorization": "Token token=<%= iparam.fcrm_api_key %>"
+      }
+    }
+  }
+}

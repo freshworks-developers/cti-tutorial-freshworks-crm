@@ -1,5 +1,5 @@
 {
-  "platform-version": "2.1",
+  "platform-version": "2.3",
   "product": {
     "freshworks_crm": {
       "location": {
@@ -7,10 +7,20 @@
           "url": "index.html",
           "icon": "styles/images/icon.svg"
         }
+      },
+      "requests": {
+        "getSalesActivityTypes": {},
+        "getSalesActivityOutcomes": {},
+        "createSalesActivity": {},
+        "createCallLog": {},
+        "createContact": {},
+        "getContactFilters": {},
+        "getContacts": {}
       }
     }
   },
-  "whitelisted-domains": [
-    "https://<%= iparam.fcrm_domain %>"
-  ]
+  "engines": {
+    "node": "18.18.2",
+    "fdk": "9.1.0"
+  }
 }
