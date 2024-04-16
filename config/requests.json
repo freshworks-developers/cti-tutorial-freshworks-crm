@@ -1,0 +1,32 @@
+{
+  "getSalesActivityTypes": {
+    "schema": {
+      "method": "GET",
+      "host": "<%= iparam.fcrm_domain %>",
+      "path": "/crm/sales/api/selector/sales_activity_types",
+      "headers": {
+        "Authorization": "Token token=<%= iparam.fcrm_api_key %>"
+      }
+    }
+  },
+  "getSalesActivityOutcomes": {
+    "schema": {
+      "method": "GET",
+      "host": "<%= iparam.fcrm_domain %>",
+      "path": "/crm/sales/api/selector/sales_activity_types/<%= context.salesActivityTypeId %>/sales_activity_outcomes",
+      "headers": {
+        "Authorization": "Token token=<%= iparam.fcrm_api_key %>"
+      }
+    }
+  },
+  "getContactFilters": {
+    "schema": {
+      "method": "GET",
+      "host": "<%= iparam.fcrm_domain %>",
+      "path": "/crm/sales/api/contacts/filters",
+      "headers": {
+        "Authorization": "Token token=<%= iparam.fcrm_api_key %>"
+      }
+    }
+  }
+}

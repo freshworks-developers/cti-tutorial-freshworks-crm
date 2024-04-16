@@ -1,16 +1,23 @@
 {
-  "platform-version": "2.1",
-  "product": {
-    "freshworks_crm": {
+  "platform-version": "3.0",
+  "modules": {
+    "common": {
       "location": {
         "left_nav_cti": {
           "url": "index.html",
           "icon": "styles/images/icon.svg"
         }
+      },
+      "requests": {
+        "getSalesActivityTypes": {},
+        "getSalesActivityOutcomes": {},
+        "getContactFilters": {}
       }
-    }
+    },
+    "deal": {}
   },
-  "whitelisted-domains": [
-    "https://<%= iparam.fcrm_domain %>"
-  ]
+  "engines": {
+    "node": "18.18.2",
+    "fdk": "9.1.0"
+  }
 }
